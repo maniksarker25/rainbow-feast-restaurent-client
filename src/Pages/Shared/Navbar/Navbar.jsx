@@ -4,10 +4,10 @@ const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <Link>Home</Link>
+        <Link to='/'>Home</Link>
       </li>
       <li>
-        <Link>Home</Link>
+        <Link to='/menu'>Menu</Link>
       </li>
       <li>
         <Link>Home</Link>
