@@ -6,7 +6,7 @@ const MenuCard = ({ item }) => {
       <div className="p-6">
         <h6 className="text-2xl my-3 font-semibold">{name}</h6>
         <p >{recipe}</p>
-        <button className="uppercase font-semibold mt-6 text-[#BB8506] bg-[#E8E8E8] px-6 py-3 rounded-lg border-b-2 border-[#BB8506]">Add To Cart</button>
+        <button className="uppercase font-semibold mt-6 text-[#BB8506] bg-[#E8E8E8] px-6 py-3 rounded-lg border-b-2 border-[#BB8506] hover:bg-[#1F2937]">Add To Cart</button>
       </div>
     </div>
   );

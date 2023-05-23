@@ -49,8 +49,8 @@ const Navbar = () => {
           </div>
           <Link >
             <div className="text-white">
-                <h2 className="text-4xl font-bold">Rainbow Feast</h2>
-                <p className="text-3xl font-bold">R e s t a u r a n t</p>
+                <h2 className=" text-xl md:text-4xl font-bold">Rainbow Feast</h2>
+                <p className="  md:text-3xl font-bold">R e s t a u r a n t</p>
             </div>
             </Link>
         </div>
