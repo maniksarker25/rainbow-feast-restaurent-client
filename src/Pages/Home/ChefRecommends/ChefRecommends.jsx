@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
-import MenuCard from "./MenuCard";
+import MenuCard from "../../../components/MenuCard/MenuCard";
 
 
 const ChefRecommends = () => {
