@@ -1,6 +1,6 @@
 import useMenu from "../../../Hooks/UseMenu";
 import orderCoverImg from "../../../assets/shop/banner2.jpg";
-import MenuCard from "../../../components/MenuCard/MenuCard";
+// import MenuCard from "../../../components/MenuCard/MenuCard";
 import Cover from "../../Shared/Cover/Cover";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -37,7 +37,7 @@ const Order = () => {
       </div>
       <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
         <TabList className="mb-12 text-center font-bold">
-          <Tab>Today's Offered</Tab>
+          <Tab>Today Offered</Tab>
           <Tab>SALAD</Tab>
           <Tab>PIZZA</Tab>
           <Tab>SOUPS</Tab>

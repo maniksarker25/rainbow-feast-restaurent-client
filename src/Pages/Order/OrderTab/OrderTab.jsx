@@ -1,6 +1,7 @@
 import MenuCard from "../../../components/MenuCard/MenuCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+//TODO: implement pagination here
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
