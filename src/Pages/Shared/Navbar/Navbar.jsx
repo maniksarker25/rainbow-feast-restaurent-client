@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  console.log(user?.email)
   const [cart] = useCart();
   // console.log(cart)
 
@@ -31,7 +32,7 @@ const Navbar = () => {
         <NavLink className={({ isActive }) => (isActive ? "active" : "default")} to="/orderFood/salad">Order Food</NavLink>
       </li>
       <li>
-        <NavLink className={({ isActive }) => (isActive ? "active" : "default")} to="/userDashboard/myCart">
+        <NavLink className={({ isActive }) => (isActive ? "active" : "default")} to="/dashboard/myCart">
           <div className=" flex relative">
             <div>
               {" "}

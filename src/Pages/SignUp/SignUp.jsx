@@ -5,9 +5,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignUp = () => {
-    const {createUser,updateUserProfile} = useContext(AuthContext)
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -19,31 +20,46 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const handleSignUp = (data) => {
-    createUser(data.email,data.password)
-    .then(result=>{
+    setError("");
+    setSuccess("");
+    createUser(data.email, data.password)
+      .then((result) => {
         const createdUser = result.user;
-        setSuccess('User created successfully')
-        updateUserProfile(data.name,data.photoURL);
-        reset();
-        Swal.fire({
-            position: 'top-center',
-            icon: 'success',
-            title: 'User Created Successfully.Now Login Please!',
-            showConfirmButton: false,
-            timer: 1500
+        setSuccess("User created successfully");
+        updateUserProfile(data.name, data.photoURL)
+          .then(() => {
+            const savedUser = {name:data.name, email:data.email}
+            fetch("http://localhost:5000/users",{
+              method:'POST',
+              headers:{'content-type':'application/json'},
+              body:JSON.stringify(savedUser)
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.insertedId) {
+                  reset();
+                  Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: "User Created Successfully.Now Login Please!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  navigate("/login");
+                }
+              });
           })
-          navigate('/login')
-
-    })
-    .catch(error=>{
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => {
         const errorMessage = error.message;
-        setError(errorMessage)
-    })
+        setError(errorMessage);
+      });
   };
   //   console.log(watch("example"));
   return (
     <>
-     <Helmet>
+      <Helmet>
         <title>RainbowFeast-SignUp</title>
       </Helmet>
       <div className="hero h-[700px] bg-base-200 mt-20 shadow-lg">
@@ -155,6 +171,7 @@ const SignUp = () => {
                 </Link>
               </p>
             </div>
+            <SocialLogin/>
           </div>
         </div>
       </div>

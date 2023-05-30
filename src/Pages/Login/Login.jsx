@@ -10,6 +10,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/SocialLogin/SocialLogin";
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const { signIn, setLoading } = useContext(AuthContext);
@@ -29,7 +30,7 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const loggedUser = result.user;
-        // console.log(loggedUser);
+        console.log(loggedUser);
         Swal.fire({
           position: 'top-center',
           icon: 'success',
@@ -133,6 +134,7 @@ const Login = () => {
                 </Link>
               </p>
             </div>
+            <SocialLogin/>
           </div>
         </div>
       </div>
