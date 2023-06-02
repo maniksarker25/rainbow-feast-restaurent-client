@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 const MyCart = () => {
   const [cart,refetch] = useCart();
   const total = cart.reduce((sum, item) => item.price + sum, 0);
+  const totalPrice = parseFloat(total.toFixed(2));
 
   // handle delete item
   const handleDelete = (item) => {
@@ -47,7 +48,7 @@ const MyCart = () => {
             <h4 className=" md:text-3xl font-bold ">
               Total orders:{cart.length}
             </h4>
-            <h4 className="md:text-3xl font-bold ">Total price:${total}</h4>
+            <h4 className="md:text-3xl font-bold ">Total price:${totalPrice}</h4>
             <Link to='/dashboard/payment'><button className="bg-[#D1A054]  font-semibold rounded-md text-white px-4 py-2">
               Pay
             </button></Link>
