@@ -16,7 +16,7 @@ const Payment = () => {
     return (
         <div>
             <SectionTitle subHeading={"--please provide--"} heading={"Payments"}></SectionTitle>
-            <Elements stripe={stripePromise}><CheckoutForm price={price} /></Elements>
+            <Elements stripe={stripePromise}><CheckoutForm price={price} cart={cart} /></Elements>
         </div>
     );
 };

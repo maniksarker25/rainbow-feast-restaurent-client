@@ -3,16 +3,18 @@ import { useState } from "react";
 import useAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import { useEffect } from "react";
 import useAuth from "../../../Hooks/UseAuth";
+import Swal from "sweetalert2";
+import './CheckoutForm.css'
 
-const CheckoutForm = ({ price }) => {
+const CheckoutForm = ({ price, cart }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [axiosSecure] = useAxiosSecure();
-  const {user} = useAuth();
+  const { user } = useAuth();
   const [cardError, setCardError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [processing, setProcessing] = useState(false);
-  const [transactionId,setTransactionId] = useState('');
+  const [transactionId, setTransactionId] = useState("");
 
   //
   useEffect(() => {
@@ -20,7 +22,7 @@ const CheckoutForm = ({ price }) => {
       console.log(res.data.clientSecret);
       setClientSecret(res.data.clientSecret);
     });
-  }, []);
+  }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,7 +34,7 @@ const CheckoutForm = ({ price }) => {
     if (card === null) {
       return;
     }
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
@@ -40,32 +42,52 @@ const CheckoutForm = ({ price }) => {
       // console.log('error', error)
       setCardError(error.message);
     } else {
-      console.log('payment method', paymentMethod)
+      // console.log('payment method', paymentMethod)
       setCardError("");
     }
-    setProcessing(true)
-    const { paymentIntent, error:confirmError } = await stripe.confirmCardPayment(
-     clientSecret,
-      {
+    setProcessing(true);
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: card,
           billing_details: {
-            name: user?.displayName || 'anonymous',
-            email:user?.email || 'unknown'
+            name: user?.displayName || "anonymous",
+            email: user?.email || "unknown",
           },
         },
-      }
-    );
-    if(confirmError){
-      setCardError(confirmError.message)
+      });
+    if (confirmError) {
+      setCardError(confirmError.message);
     }
     // console.log("payment intent",paymentIntent)
-    setProcessing(false)
-    if(paymentIntent.status === 'succeeded'){
+    setProcessing(false);
+    if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
-      // TODO: next steps----------
+      // save payment in database
+      const payment = {
+        email: user?.email,
+        transactionId: paymentIntent.id,
+        price,
+        date: new Date(),
+        quantity: cart.length,
+        status:'service pending',
+        cartItems: cart.map((item) => item._id),
+        menuItems: cart.map((item)=>item.menuId ),
+        itemNames: cart.map((item) => item.name),
+      };
+      axiosSecure.post("/payments", payment).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Payment Successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
     }
-
   };
   return (
     <>
@@ -93,7 +115,7 @@ const CheckoutForm = ({ price }) => {
         />
         <div className="text-center">
           <button
-            className="bg-[#D1A054] text-white cursor-pointer font-semibold px-20 py-2 my-8"
+            className="bg-[#D1A054] text-white cursor-pointer font-semibold px-20 py-3 mt-20 "
             type="submit"
             disabled={!stripe || !clientSecret || processing}
           >
@@ -102,7 +124,11 @@ const CheckoutForm = ({ price }) => {
         </div>
       </form>
       {cardError && <p className="text-center text-red-600">{cardError}</p>}
-      {transactionId && <p className="text-center text-green-500">Transaction Id: {transactionId}</p>}
+      {transactionId && (
+        <p className="text-center text-green-500">
+          Transaction Id: {transactionId}
+        </p>
+      )}
     </>
   );
 };
