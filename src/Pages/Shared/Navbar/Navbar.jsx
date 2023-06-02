@@ -3,9 +3,11 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../Hooks/UseCart";
 import { NavLink } from "react-router-dom";
+import UseAdmin from "../../../Hooks/UseAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = UseAdmin();
   console.log(user?.email)
   const [cart] = useCart();
   // console.log(cart)
@@ -32,7 +34,7 @@ const Navbar = () => {
         <NavLink className={({ isActive }) => (isActive ? "active" : "default")} to="/orderFood/salad">Order Food</NavLink>
       </li>
       <li>
-        <NavLink className={({ isActive }) => (isActive ? "active" : "default")} to="/dashboard/myCart">
+        {isAdmin ? <NavLink to='/dashboard/allUsers' className={({ isActive }) => (isActive ? "active" : "default")}>DashBoard</NavLink>:<NavLink className={({ isActive }) => (isActive ? "active" : "default")} to="/dashboard/myCart">
           <div className=" flex relative">
             <div>
               {" "}
@@ -42,7 +44,7 @@ const Navbar = () => {
               +{cart?.length || 0}
             </div>
           </div>
-        </NavLink>
+        </NavLink>}
       </li>
       {user ? (
         <li>

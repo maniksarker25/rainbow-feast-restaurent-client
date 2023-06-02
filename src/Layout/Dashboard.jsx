@@ -12,14 +12,17 @@ import {
   FaUsers,
 } from "react-icons/fa";
 import useCart from "../Hooks/UseCart";
+import UseAdmin from "../Hooks/UseAdmin";
 
 const UserDashboard = () => {
   const [cart] = useCart();
 
   //TODO: load data from the server to have dynamic admin based on data
-  const isAdmin = true;
+  // const isAdmin = true;
+  const [isAdmin] = UseAdmin();
+  // console.log(isAdmin)
   return (
-    <div className="drawer drawer-mobile max-w-screen-xl mx-auto bg-[#F6F6F6]">
+    <div className="drawer drawer-mobile max-w-screen-xl mx-auto">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         <Outlet></Outlet>
@@ -46,13 +49,13 @@ const UserDashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/allItems">
+                <NavLink to="/dashboard/addItem">
                   <FaUtensils />
                   Add Items
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/manageItems">
+                <NavLink to="/dashboard/manageItem">
                   <FaWallet />
                   Manage Items
                 </NavLink>

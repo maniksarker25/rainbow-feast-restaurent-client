@@ -6,7 +6,7 @@ import useAuth from './UseAuth';
 
 
 const useAxiosSecure = () => {
-  const {logOut} = useAuth();
+  const {logOut,setLoading} = useAuth();
   const navigate = useNavigate();
 
   const axiosSecure = axios.create({
@@ -26,7 +26,7 @@ const useAxiosSecure = () => {
       (response) => response,
       async (error) => {
         if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-          await logOut();
+          await logOut()
         // alert('token expired')
           navigate('/login');
         }
