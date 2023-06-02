@@ -6,7 +6,7 @@ import CheckoutForm from "./CheckoutForm";
 
 const Payment = () => {
 
-    //TODO: provide publishable keyy
+    //TODO: provide publishable key
     const stripePromise = loadStripe('');
     return (
         <div>
