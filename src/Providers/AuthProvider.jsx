@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
 
   // logout
   const logOut = () => {
-    setLoading(true);
+    // setLoading(true);
     return signOut(auth);
   };
 
@@ -64,7 +64,7 @@ const AuthProvider = ({ children }) => {
           });
       } else {
         localStorage.removeItem("access-token");
-        // setLoading(false);
+        setLoading(false);
       }
     });
     return () => {

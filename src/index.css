@@ -6,9 +6,9 @@
   @apply font-semibold tracking-wide text-orange-600 transition-colors  bg-transparent duration-200;
 }
 
-.default {
+/* .default {
   @apply font-semibold tracking-wide text-white transition-colors duration-200 hover:text-[#4293E5];
-}
+} */
 
 .li a.active{
   background-color: transparent;

@@ -6,7 +6,7 @@ import useAuth from "./UseAuth";
 
 // create base url 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: "http://localhost:5000",
 });
 const useAxiosSecure = () => {
   const { logOut, setLoading } = useAuth();
@@ -30,12 +30,12 @@ const useAxiosSecure = () => {
         ) {
           await logOut();
           // alert('token expired')
-          navigate("/login");
+          navigate("/");
         }
         return Promise.reject(error);
       }
     );
-  }, [logOut, navigate, axiosSecure]);
+  }, [logOut, navigate]);
 
   return [axiosSecure];
 };

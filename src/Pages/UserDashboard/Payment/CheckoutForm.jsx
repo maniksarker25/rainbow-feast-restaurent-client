@@ -4,7 +4,6 @@ import useAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import { useEffect } from "react";
 import useAuth from "../../../Hooks/UseAuth";
 import Swal from "sweetalert2";
-import './CheckoutForm.css'
 
 const CheckoutForm = ({ price, cart }) => {
   const stripe = useStripe();
@@ -18,10 +17,12 @@ const CheckoutForm = ({ price, cart }) => {
 
   //
   useEffect(() => {
-    axiosSecure.post("/create-payment-intent", { price }).then((res) => {
-      console.log(res.data.clientSecret);
-      setClientSecret(res.data.clientSecret);
-    });
+    if (price > 0) {
+      axiosSecure.post("/create-payment-intent", { price }).then((res) => {
+        console.log(res.data.clientSecret);
+        setClientSecret(res.data.clientSecret);
+      });
+    }
   }, [price, axiosSecure]);
 
   const handleSubmit = async (event) => {
@@ -70,14 +71,14 @@ const CheckoutForm = ({ price, cart }) => {
         price,
         date: new Date(),
         quantity: cart.length,
-        status:'service pending',
+        status: "service pending",
         cartItems: cart.map((item) => item._id),
-        menuItems: cart.map((item)=>item.menuId ),
+        menuItems: cart.map((item) => item.menuId),
         itemNames: cart.map((item) => item.name),
       };
       axiosSecure.post("/payments", payment).then((res) => {
         console.log(res.data);
-        if (res.data.insertedId) {
+        if (res.data.insertedResult.insertedId) {
           Swal.fire({
             position: "top-center",
             icon: "success",
@@ -123,9 +124,9 @@ const CheckoutForm = ({ price, cart }) => {
           </button>
         </div>
       </form>
-      {cardError && <p className="text-center text-red-600">{cardError}</p>}
+      {cardError && <p className="text-center mt-12 text-red-600">{cardError}</p>}
       {transactionId && (
-        <p className="text-center text-green-500">
+        <p className="text-center mt-12 text-green-500">
           Transaction Id: {transactionId}
         </p>
       )}

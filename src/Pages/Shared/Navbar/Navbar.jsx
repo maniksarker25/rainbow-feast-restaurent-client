@@ -8,7 +8,7 @@ import UseAdmin from "../../../Hooks/UseAdmin";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isAdmin] = UseAdmin();
-  console.log(user?.email)
+  console.log(user?.email);
   const [cart] = useCart();
   // console.log(cart)
 
@@ -22,19 +22,42 @@ const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <NavLink className={({ isActive }) => (isActive ? "active" : "default")} to="/">Home</NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? "active" : "default")}
+          to="/"
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink className={({ isActive }) => (isActive ? "active" : "default")} to="/menu">Menu</NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? "active" : "default")}
+          to={isAdmin ? '/dashboard/adminHome':'/dashboard/userHome'}
+        >
+          DashBoard
+        </NavLink>
       </li>
       <li>
-        <NavLink className={({ isActive }) => (isActive ? "active" : "default")} to="/secret">Secret Menu</NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? "active" : "default")}
+          to="/menu"
+        >
+          Menu
+        </NavLink>
       </li>
       <li>
-        <NavLink className={({ isActive }) => (isActive ? "active" : "default")} to="/orderFood/salad">Order Food</NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? "active" : "default")}
+          to="/orderFood/salad"
+        >
+          Order Food
+        </NavLink>
       </li>
       <li>
-        {isAdmin ? <NavLink to='/dashboard/allUsers' className={({ isActive }) => (isActive ? "active" : "default")}>DashBoard</NavLink>:<NavLink className={({ isActive }) => (isActive ? "active" : "default")} to="/dashboard/myCart">
+        <NavLink
+          className={({ isActive }) => (isActive ? "active" : "default")}
+          to="/dashboard/myCart"
+        >
           <div className=" flex relative">
             <div>
               {" "}
@@ -44,16 +67,21 @@ const Navbar = () => {
               +{cart?.length || 0}
             </div>
           </div>
-        </NavLink>}
+        </NavLink>
       </li>
       {user ? (
         <li>
-          <button onClick={handleLogOut}>LogOut</button>
+          <button onClick={handleLogOut}>LOGOUT</button>
         </li>
       ) : (
         <>
           <li>
-            <NavLink className={({ isActive }) => (isActive ? "active" : "default")} to="/login">Login</NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active" : "default")}
+              to="/login"
+            >
+              LOGIN
+            </NavLink>
           </li>
         </>
       )}
@@ -82,7 +110,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact  dropdown-content mt-3 p-2 shadow  text-white bg-black opacity-50 rounded-box w-52"
+              className="menu menu-compact uppercase dropdown-content mt-3 p-2 shadow  text-white bg-black opacity-50 rounded-box w-52"
             >
               {navItems}
             </ul>
@@ -95,7 +123,7 @@ const Navbar = () => {
           </NavLink>
         </div>
         <div className=" hidden lg:flex">
-          <ul className="menu menu-horizontal text-xl font-bold px-1">
+          <ul className="menu uppercase menu-horizontal text-xl font-bold px-1">
             {navItems}
           </ul>
         </div>
