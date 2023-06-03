@@ -78,7 +78,7 @@ const CheckoutForm = ({ price, cart }) => {
       };
       axiosSecure.post("/payments", payment).then((res) => {
         console.log(res.data);
-        if (res.data.insertedResult.insertedId) {
+        if (res.data.insertResult.insertedId || res.data.deleteResult.deleteCount > 0) {
           Swal.fire({
             position: "top-center",
             icon: "success",
@@ -90,6 +90,7 @@ const CheckoutForm = ({ price, cart }) => {
       });
     }
   };
+  // console.log(cart)
   return (
     <>
       {" "}
