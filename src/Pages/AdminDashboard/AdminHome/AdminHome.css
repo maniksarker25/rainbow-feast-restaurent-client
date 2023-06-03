@@ -1,0 +1,20 @@
+.revenue {
+  background: linear-gradient(90deg, #bb34f5 0%, #fcdbff 100%);
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+.costumers {
+  background: linear-gradient(90deg, #d3a256 0%, #fde8c0 100%);
+  border-radius: 8px;
+}
+.products {
+  background: linear-gradient(90deg, #fe4880 0%, #fecde9 100%);
+  border-radius: 8px;
+}
+.orders {
+  background: linear-gradient(90deg, #6aaeff 0%, #b6f7ff 100%);
+  border-radius: 8px;
+}
