@@ -16,7 +16,7 @@ const useCart = () =>{
         //     const response = await fetch(`http://localhost:5000/carts?email=${user?.email}`,{
         //         headers:{authorization: `bearer ${token}`}
         //     })
-        //     return response.json();
+        //     return response.json();;
         // },
         queryFn: async ()=>{
             const res = await axiosSecure(`/carts?email=${user?.email}`)

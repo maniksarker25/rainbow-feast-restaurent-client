@@ -9,6 +9,7 @@ import {
   YAxis,
   CartesianGrid,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 import { FaMoneyCheck, FaProductHunt, FaTruck, FaUser } from "react-icons/fa";
 import { PieChart, Pie, } from "recharts";
@@ -26,7 +27,7 @@ const AdminHome = () => {
     },
   });
 
-  // load chart data
+  // load chart data---
   const { data: chartData = [] } = useQuery({
     queryKey: ["chart-data"],
     queryFn: async () => {
@@ -134,7 +135,7 @@ Z`;
           </div>
         </div>
       </div>
-      <div className="md:flex mt-12 lg:mt-32">
+      <div className="md:flex gap-16 mt-12 lg:mt-32">
         <div>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart
@@ -165,6 +166,7 @@ Z`;
         <div>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
+              <Legend></Legend>
               <Pie
                 data={chartData}
                 cx="50%"
@@ -177,6 +179,7 @@ Z`;
               >
                 {chartData.map((entry, index) => (
                   <Cell
+                  name={entry.category}
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
                   />
