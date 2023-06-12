@@ -131,7 +131,7 @@ const AddItem = () => {
         </div>
         <button
           type="submit"
-          className="add-item-btn text-white flex items-center gap-2 font-bold px-8 py-3  rounded-md my-6 "
+          className="gradient-btn text-white flex items-center gap-2 font-bold px-8 py-3  rounded-md my-6 "
         >
           Add Item <FaUtensils />
         </button>
