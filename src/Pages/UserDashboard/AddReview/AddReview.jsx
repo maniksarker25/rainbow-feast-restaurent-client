@@ -1,9 +1,10 @@
+import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 
 
 const AddReview = () => {
     return (
         <div>
-            <h1>Add review</h1>
+            <SectionTitle subHeading={"---Sharing is Caring!!!---"} heading={"GIVE A REVIEW..."}></SectionTitle>
         </div>
     );
 };

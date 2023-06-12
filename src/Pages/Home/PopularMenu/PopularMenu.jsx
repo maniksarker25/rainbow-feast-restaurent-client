@@ -2,10 +2,11 @@
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import MenuItem from "../../Shared/MenuItem/MenuItem";
 import useMenu from "../../../Hooks/UseMenu";
+import LoadingSpiner from "../../../components/LoadingSpiner/LoadingSpiner";
 
 
 const PopularMenu = () => {
-    const [menu] = useMenu();
+    const [menu,menuLoading] = useMenu();
     const popularMenu = menu.filter(item=>item.category === 'popular');
     // const [menu,setMenu] = useState([]);
     // useEffect(()=>{
@@ -16,6 +17,11 @@ const PopularMenu = () => {
     //         setMenu(popularItems)
     //     })
     // },[])
+
+
+    if(menuLoading){
+        return <LoadingSpiner/>
+    }
     return (
         <section className="mt-20">
             <SectionTitle subHeading={'---Check it out---'} heading={'FROM OUR MENU'}></SectionTitle>

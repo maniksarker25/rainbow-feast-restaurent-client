@@ -7,7 +7,7 @@ const Profile = ({ user,handleLogOut }) => {
         {user.photoURL ? (
           <img
             title={user?.displayName}
-            className="w-10 h-10 rounded-full mr-4 cursor-pointer"
+            className="w-8 h-8 rounded-full mr-4 cursor-pointer"
             src={user?.photoURL}
           ></img>
         ) : (
@@ -18,7 +18,7 @@ const Profile = ({ user,handleLogOut }) => {
           ></img>
         )}
       </Menu.Button>
-      <Menu.Items className="absolute top-16 right-6 z-30 bg-black text-white text-sm flex flex-col p-8 rounded-lg space-y-3">
+      <Menu.Items className="absolute top-16 right-6 z-30 bg-black text-white text-xl flex flex-col p-8 rounded-lg space-y-3">
         <Menu.Item>
           {({ active }) => (
             <a

@@ -75,7 +75,7 @@ const Navbar = () => {
           </div>
         </NavLink>
       </li>
-      {loading ? (
+      {/* {loading ? (
             "Loading"
           ) : user ? (
             <Profile handleLogOut={handleLogOut} user={user} />
@@ -88,7 +88,7 @@ const Navbar = () => {
                 </button>
               </Link>
             </Link>
-          )}
+          )} */}
     </>
   );
   return (
@@ -134,7 +134,7 @@ const Navbar = () => {
         {/* <div className="navbar-end">
           <a className="btn">Get started</a>
         </div> */}
-      <div className="lg:hidden">
+      <div >
       {loading ? (
             "Loading"
           ) : user ? (

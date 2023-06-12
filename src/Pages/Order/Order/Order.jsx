@@ -9,13 +9,14 @@ import "./Order.css";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import LoadingSpiner from "../../../components/LoadingSpiner/LoadingSpiner";
 
 const Order = () => {
   const categories = ["offered", "salad", "pizza", "soup", "desert", "drinks"];
   const { category } = useParams();
   const initialIndex = categories.indexOf(category);
   const [tabIndex, setTabIndex] = useState(initialIndex);
-  const [menu] = useMenu();
+  const [menu, menuLoading] = useMenu();
   // const popularMenu = menu.filter(item=> item.category === 'popular');
   const dessertMenu = menu.filter((item) => item.category === "dessert");
   const saladMenu = menu.filter((item) => item.category === "salad");
@@ -23,6 +24,11 @@ const Order = () => {
   const drinksMenu = menu.filter((item) => item.category === "drinks");
   const soupMenu = menu.filter((item) => item.category === "soup");
   const pizzaMenu = menu.filter((item) => item.category === "pizza");
+
+  if (menuLoading) {
+    return <LoadingSpiner />;
+  }
+
   return (
     <div>
       <Helmet>

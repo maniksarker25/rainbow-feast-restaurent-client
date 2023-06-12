@@ -6,10 +6,10 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/UseAxiosSecure";
 
 const ManageItem = () => {
-  const [menu, loading, refetch] = useMenu();
+  const [menu, menuLoading, refetch] = useMenu();
   const [axiosSecure] = useAxiosSecure();
 
-  if (loading) {
+  if (menuLoading) {
     return <LoadingSpiner />;
   }
 

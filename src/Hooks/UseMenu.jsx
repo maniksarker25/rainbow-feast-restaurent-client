@@ -16,7 +16,7 @@ const useMenu = () => {
   // return [menu,loading];
 
   // use tan stack query ------------
-  const { data: menu = [], isLoading: loading, refetch } = useQuery({
+  const { data: menu = [], isLoading: menuLoading, refetch } = useQuery({
     queryKey: ["menu"],
     queryFn: async () => {
       const res = await fetch('https://rainbow-feast-restaurant-server.vercel.app/menu');
@@ -24,7 +24,7 @@ const useMenu = () => {
       return res.json();
     }
   });
-  return [menu, loading,refetch];
+  return [menu, menuLoading,refetch];
 };
 
 export default useMenu;

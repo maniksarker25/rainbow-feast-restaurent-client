@@ -8,11 +8,12 @@ import soupBg from '../../../assets/menu/soup-bg.jpg'
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useMenu from "../../../Hooks/UseMenu";
 import MenuCategory from "../MenuCategory/MenuCategory";
+import LoadingSpiner from "../../../components/LoadingSpiner/LoadingSpiner";
 
 
 
 const Menu = () => {
-    const [menu] = useMenu();
+    const [menu,menuLoading] = useMenu();
     // const popularMenu = menu.filter(item=> item.category === 'popular');
     const dessertMenu = menu.filter(item=> item.category === 'dessert');
     const saladMenu = menu.filter(item=> item.category === 'salad');
@@ -20,6 +21,12 @@ const Menu = () => {
     // const drinksMenu = menu.filter(item=> item.category === 'drinks');
     const soupMenu = menu.filter(item=> item.category === 'soup');
     const pizzaMenu = menu.filter(item=> item.category === 'pizza');
+
+
+
+    if(menuLoading){
+      return <LoadingSpiner/>
+    }
   return (
     <div>
       <Helmet>
