@@ -2,11 +2,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../Hooks/UseCart";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import UseAdmin from "../../../Hooks/UseAdmin";
+import Profile from "../../../components/Profile/Profile";
+import LoadingSpiner from "../../../components/LoadingSpiner/LoadingSpiner";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut,loading } = useContext(AuthContext);
   const [isAdmin] = UseAdmin();
   // console.log(user?.email);
   const [cart] = useCart();
@@ -19,6 +21,10 @@ const Navbar = () => {
         console.log(error);
       });
   };
+
+  if(loading){
+    return <LoadingSpiner/>
+  }
   const navItems = (
     <>
       <li>
@@ -53,7 +59,7 @@ const Navbar = () => {
           Order Food
         </NavLink>
       </li>
-      <li>
+      <li className="lg:mr-6">
         <NavLink
           className={({ isActive }) => (isActive ? "active" : "default")}
           to="/dashboard/myCart"
@@ -69,22 +75,20 @@ const Navbar = () => {
           </div>
         </NavLink>
       </li>
-      {user ? (
-        <li>
-          <button onClick={handleLogOut}>LOGOUT</button>
-        </li>
-      ) : (
-        <>
-          <li>
-            <NavLink
-              className={({ isActive }) => (isActive ? "active" : "default")}
-              to="/login"
-            >
-              LOGIN
-            </NavLink>
-          </li>
-        </>
-      )}
+      {loading ? (
+            "Loading"
+          ) : user ? (
+            <Profile handleLogOut={handleLogOut} user={user} />
+          ) : (
+            <Link>
+              <Link to="/login">
+                {" "}
+                <button className="text-xl font-bold">
+                  LOGIN
+                </button>
+              </Link>
+            </Link>
+          )}
     </>
   );
   return (
@@ -110,7 +114,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact uppercase dropdown-content mt-3 p-2 shadow  text-white bg-black opacity-50 rounded-box w-52"
+              className="menu menu-compact  uppercase dropdown-content mt-3 p-2 shadow  text-white bg-black opacity-50 rounded-box w-52"
             >
               {navItems}
             </ul>
@@ -123,13 +127,29 @@ const Navbar = () => {
           </NavLink>
         </div>
         <div className=" hidden lg:flex">
-          <ul className="menu uppercase menu-horizontal text-xl font-bold px-1">
+          <ul className="menu uppercase  menu-horizontal text-xl font-bold px-1">
             {navItems}
           </ul>
         </div>
         {/* <div className="navbar-end">
           <a className="btn">Get started</a>
         </div> */}
+      <div className="lg:hidden">
+      {loading ? (
+            "Loading"
+          ) : user ? (
+            <Profile handleLogOut={handleLogOut} user={user} />
+          ) : (
+            <Link>
+              <Link to="/login">
+                {" "}
+                <button className="text-xl font-bold">
+                  LOGIN
+                </button>
+              </Link>
+            </Link>
+          )}
+      </div>
       </div>
     </div>
   );

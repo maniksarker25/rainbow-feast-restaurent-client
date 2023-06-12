@@ -41,11 +41,11 @@ const SignUp = () => {
                   Swal.fire({
                     position: "top-center",
                     icon: "success",
-                    title: "User Created Successfully.Now Login Please!",
+                    title: "User Created Successfully!",
                     showConfirmButton: false,
                     timer: 1500,
                   });
-                  navigate("/login");
+                  navigate("/");
                 }
               });
           })

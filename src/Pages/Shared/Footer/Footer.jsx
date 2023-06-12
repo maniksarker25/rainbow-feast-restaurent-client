@@ -9,7 +9,7 @@ const Footer = () => {
             <h2 className="text-2xl">About Us</h2>
             <hr />
             <div className="mt-4">
-              <h4 className="text-2xl my-4 flex gap-2 items-center"><FaGraduationCap className="text-3xl"/>Language Lab</h4>
+              <h4 className="text-2xl my-4 flex gap-2 items-center"><FaGraduationCap className="text-3xl"/>RainbowFeast</h4>
               <p>
                 {" "}
                 We are dedicated to helping individuals enhance <br /> their
@@ -31,10 +31,10 @@ const Footer = () => {
                 <Link to='/'>Home</Link>
               </p>
               <p>
-                <Link to='/classes'>Classes</Link>
+                <Link to='/menu'>Menu</Link>
               </p>
               <p className="mb-4">
-                <Link to='/instructors'>Instructors</Link>
+                <Link to='/orderFood/:category'>Order</Link>
               </p>
             </div>
           </div>
