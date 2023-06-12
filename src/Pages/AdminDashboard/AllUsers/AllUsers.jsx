@@ -7,14 +7,14 @@ import useAxiosSecure from "../../../Hooks/UseAxiosSecure";
 
 const AllUsers = () => {
   const [axiosSecure] = useAxiosSecure();
-  const { data: users = [], refetch } = useQuery(["users"], async () => {
+  const { data: users = [], refetch } = useQuery(["users"], async() => {
     const res = await axiosSecure.get("/users");
     return res.data;
   });
 
   // handle make admin 
   const handleMakeAdmin = user =>{
-    fetch(`https://rainbow-feast-restaurant-server.vercel.app//users/admin/${user._id}`,{
+    fetch(`https://rainbow-feast-restaurant-server.vercel.app/users/admin/${user._id}`,{
       method:'PATCH'
     })
     .then(res=>res.json())

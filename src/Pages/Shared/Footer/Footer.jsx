@@ -1,58 +1,77 @@
-import { FaFacebook, FaInstagram, FaGithub } from "react-icons/fa";
-
+import { FaFacebook, FaInstagram, FaMapMarkerAlt, FaTwitter,FaViber,FaGraduationCap } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <div className="bg-black mt-20 ">
-      <footer className="footer max-w-screen-xl text-white mx-auto px-10 pt-20 pb-6s  ">
-        <div className="-mt-8">
-          {/* <img className="w-32 h-32" src={logo} alt="" /> */}
-          <p>
-            Dream Ride Toy
-            <br />
-            World Best Car Toy House
-          </p>
-        </div>
-        <div>
-          <span className="footer-title">Services</span>
-          <a className="link link-hover">Branding</a>
-          <a className="link link-hover">Sells</a>
-          <a className="link link-hover">Marketing</a>
-          <a className="link link-hover">Advertisement</a>
-        </div>
-        <div>
-          <span className="footer-title">Company</span>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Cars</a>
-          <a className="link link-hover">Press kit</a>
-        </div>
-        <div>
-          <span className="footer-title">Legal</span>
-          <a className="link link-hover">Terms of use</a>
-          <a className="link link-hover">Privacy policy</a>
-          <a className="link link-hover">Cookie policy</a>
-        </div>
-        <div>
-          <p className="footer-title">CONTACT</p>
-          <input
-            className="rounded-lg ps-2 py-2 text-black"
-            type="email"
-            placeholder="Your Email Address"
-            required
-          />
-          <button className=" primary-btn mt-2 rounded-lg ">
-            Subscribe Now
-          </button>
-          <div className="flex gap-4 mt-4">
-            <FaFacebook className="w-6 h-6 cursor-pointer" />
-            <FaInstagram className="w-6 h-6 cursor-pointer" />
-            <FaGithub className="w-6 h-6 cursor-pointer" />
+    <div className="mt-24">
+      <div className="bg-[#032E3F] text-white">
+        <div className="max-w-screen-xl mx-auto lg:flex justify-between p-10 lg:py-20 ">
+          <div>
+            <h2 className="text-2xl">About Us</h2>
+            <hr />
+            <div className="mt-4">
+              <h4 className="text-2xl my-4 flex gap-2 items-center"><FaGraduationCap className="text-3xl"/>Language Lab</h4>
+              <p>
+                {" "}
+                We are dedicated to helping individuals enhance <br /> their
+                language skills and broaden their cultural horizons..
+              </p>
+            </div>
+            <div className="flex gap-3 text-2xl my-4">
+              <FaFacebook></FaFacebook>
+              <FaInstagram />
+              <FaTwitter />
+            </div>
+          </div>
+          <div>
+            <h2 className="text-2xl">Our Links</h2>
+            <hr />
+            <div className="text-xl mt-4 lg:space-y-4 space-y-2">
+              <p>
+                {" "}
+                <Link to='/'>Home</Link>
+              </p>
+              <p>
+                <Link to='/classes'>Classes</Link>
+              </p>
+              <p className="mb-4">
+                <Link to='/instructors'>Instructors</Link>
+              </p>
+            </div>
+          </div>
+          <div className="my-6 lg:my-0">
+            <h2 className="text-2xl ">LEGAL</h2>
+            <hr />
+            <div className="space-y-3 text-xl mt-4">
+            <p><Link>Terms of use</Link></p>
+            <p><Link>Privacy policy</Link></p>
+            <p><Link>Cookie policy</Link></p>
+            </div>
+          </div>
+          <div>
+            <h2 className="text-2xl">Contact Us</h2>
+            <hr />
+            <div className="text-xl my-6 space-y-2">
+                <div className="flex items-center gap-2">
+                    <FaViber/>
+                    <p>+88 017548765614</p>
+                </div>
+                <div className="flex items-center gap-2">
+                    <FaMapMarkerAlt/>
+                    <p>Dhaka , Bangladesh</p>
+                </div>
+                <div className="flex items-center gap-2">
+                    <FaViber/>
+                    <p>+88 017548765614</p>
+                </div>
+            </div>
           </div>
         </div>
-      </footer>
-      <div className="text-white text-center pt-8  pb-20">
-        <hr className="max-w-screen-md mx-auto mb-4" />
-        Copyright © 2023 - All right reserved by Dream Ride Toy
+      </div>
+      <div className="bg-[#FF7350]">
+       <div className="max-w-screen-xl mx-auto flex justify-between text-white p-4 lg:p-6">
+       <h1 className="text-2xl font-bold hidden lg:flex items-center gap-2"><FaGraduationCap className="text-4xl"/> RainbowFeast</h1>
+        <p className="lg:text-xl font-semibold">Copyright © Qeducato 2023 . All rights reserved.</p>
+       </div>
       </div>
     </div>
   );

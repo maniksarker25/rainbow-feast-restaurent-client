@@ -61,15 +61,15 @@ const UserDashboard = () => {
                 </NavLink>
               </li>
               <li>
-              <NavLink to="/dashboard/manageBooking">
-                  <FaBook/>
+                <NavLink to="/dashboard/manageBooking">
+                  <FaBook />
                   Manage booking
                 </NavLink>
               </li>
 
               <li>
                 <NavLink to="/dashboard/allUsers">
-                  <FaUsers/>
+                  <FaUsers />
                   All Users
                 </NavLink>
               </li>
@@ -117,12 +117,12 @@ const UserDashboard = () => {
                   Add Review
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink to="dashboard/myBooking">
                   <FaBook />
                   My Booking
                 </NavLink>
-              </li>
+              </li> */}
             </>
           )}
           <div className="divider"></div>

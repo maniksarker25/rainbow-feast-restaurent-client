@@ -29,7 +29,7 @@ const SignUp = () => {
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
             const savedUser = {name:data.name, email:data.email}
-            fetch("https://rainbow-feast-restaurant-server.vercel.app//users",{
+            fetch("https://rainbow-feast-restaurant-server.vercel.app/users",{
               method:'POST',
               headers:{'content-type':'application/json'},
               body:JSON.stringify(savedUser)
@@ -167,7 +167,7 @@ const SignUp = () => {
               <p className="">
                 Already have an account?
                 <Link className="text-[#D1A054] font-bold" to="/login">
-                  Login
+                  SighUp
                 </Link>
               </p>
             </div>

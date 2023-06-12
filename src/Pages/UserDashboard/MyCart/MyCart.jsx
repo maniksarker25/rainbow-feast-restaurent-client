@@ -21,7 +21,7 @@ const MyCart = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://rainbow-feast-restaurant-server.vercel.app//carts/${item._id}`,{
+        fetch(`https://rainbow-feast-restaurant-server.vercel.app/carts/${item._id}`,{
             method:"DELETE"
 
         })
