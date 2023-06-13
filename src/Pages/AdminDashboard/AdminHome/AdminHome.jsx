@@ -14,6 +14,7 @@ import {
 import { FaMoneyCheck, FaProductHunt, FaTruck, FaUser } from "react-icons/fa";
 import { PieChart, Pie, } from "recharts";
 import "./AdminHome.css";
+import { Link } from "react-router-dom";
 
 const AdminHome = () => {
   const { user } = useAuth();
@@ -112,7 +113,7 @@ Z`;
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-4 products p-8">
+        <Link to='/dashboard/manageItem'><div className="flex items-center gap-4 products p-8">
           <FaProductHunt className="text-white lg:text-7xl" />
           <div>
             <p className="text-3xl md:text-4xl text-white font-bold ">
@@ -122,8 +123,8 @@ Z`;
               Products
             </p>
           </div>
-        </div>
-        <div className="flex items-center gap-4 orders p-8">
+        </div></Link>
+        <Link to='/dashboard/allOrders'><div className="flex items-center gap-4 orders p-8">
           <FaTruck className="text-white lg:text-5xl" />
           <div>
             <p className="text-3xl md:text-4xl text-white font-bold ">
@@ -133,7 +134,7 @@ Z`;
               Orders
             </p>
           </div>
-        </div>
+        </div></Link>
       </div>
       <div className="md:flex gap-16 mt-12 lg:mt-32">
         <div>

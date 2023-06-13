@@ -10,7 +10,7 @@ const PaymentHistory = () => {
     const {user,loading} = useAuth();
     const [axiosSecure] = useAxiosSecure();
 
-    const {data:payments=[], isLoading:paymentLoading} = useQuery({
+    const {data:paymenHistory=[], isLoading:paymentHistoryLoading} = useQuery({
         queryKey:['payment-history', user?.email],
         enabled: !loading && !!user?.email,
         queryFn: async ()=>{
@@ -20,7 +20,7 @@ const PaymentHistory = () => {
     })
 
 
-    if(paymentLoading){
+    if(paymentHistoryLoading){
         return <LoadingSpiner/>
     }
 
@@ -29,7 +29,7 @@ const PaymentHistory = () => {
             <SectionTitle subHeading={"---At a Glance!---"} heading={"PAYMENT HISTORY"}/>
             <div className="bg-white px-4 py-8 w-10/12 mx-auto ">
         <h3 className="text-2xl font-bold p-4 uppercase">
-          All Users:{payments.length}
+          All Users:{paymenHistory.length}
         </h3>
         <div className="overflow-x-auto">
           <table className="table table-zebra w-full">
@@ -45,8 +45,8 @@ const PaymentHistory = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {payments.map((payment,index) => (
-                <tr key={user._id}>
+              {paymenHistory.map((payment,index) => (
+                <tr key={payment._id}>
                   <th>{index + 1}</th>
                   <td>{payment.itemNames.map(item=><p key={item}>{item}</p>)}</td>
                   <td>{payment.email}</td>
