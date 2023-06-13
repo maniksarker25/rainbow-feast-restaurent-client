@@ -117,12 +117,12 @@ const UserDashboard = () => {
                   Add Review
                 </NavLink>
               </li>
-              {/* <li>
+              <li>
                 <NavLink to="dashboard/myBooking">
                   <FaBook />
                   My Booking
                 </NavLink>
-              </li> */}
+              </li>
             </>
           )}
           <div className="divider"></div>

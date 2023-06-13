@@ -17,4 +17,5 @@
 
 .gradient-btn{
   background: linear-gradient(90deg, #835D23 0%, #B58130 100%);
+  color: white;
 }

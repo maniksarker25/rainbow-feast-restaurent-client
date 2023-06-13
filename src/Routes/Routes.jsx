@@ -1,6 +1,4 @@
-import {
-    createBrowserRouter,
-  } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home/Home";
 import Menu from "../Pages/Menu/Menu/Menu";
@@ -20,81 +18,109 @@ import AdminHome from "../Pages/AdminDashboard/AdminHome/AdminHome";
 import ManageBooking from "../Pages/AdminDashboard/ManageBooking/ManageBooking";
 import AddReview from "../Pages/UserDashboard/AddReview/AddReview";
 import PaymentHistory from "../Pages/UserDashboard/PaymentHistory/PaymentHistory";
+import Reservation from "../Pages/UserDashboard/Reservation/Reservation";
 
- export const router = createBrowserRouter([
-    {
-      path: "/",
-      element:<Main></Main>,
-      children:[
-        {
-            path:'/',
-            element:<Home></Home>
-        },
-        {
-          path:'menu',
-          element:<Menu></Menu>
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main></Main>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "menu",
+        element: <Menu></Menu>,
+      },
+      {
+        path: "orderFood/:category",
+        element: <Order></Order>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "signUp",
+        element: <SignUp></SignUp>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "userHome",
+        element: <UserHome></UserHome>,
+      },
+      {
+        path: "myCart",
+        element: <MyCart></MyCart>,
+      },
+      {
+        path: "payment",
+        element: <Payment />,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory />,
+      },
+      {
+        path: "review",
+        element: <AddReview />,
+      },
+      {
+        path:'reservation',
+        element:<Reservation/>
+      },
+      // admin routes
+      {
+        path: "allUsers",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
 
-        },
-        {
-          path:'orderFood/:category',
-          element:<Order></Order>
-        },
-        {
-          path:'login',
-          element:<Login></Login>
-        },
-        {
-          path:'signUp',
-          element:<SignUp></SignUp>
-        },
-      ]
-    },
-    {
-      path:'/dashboard',
-      element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-      children:[
-        {
-          path:'userHome',
-          element:<UserHome></UserHome>
-        },
-        {
-          path:'myCart',
-          element:<MyCart></MyCart>
-        },
-        {
-          path:'payment',
-          element:<Payment/>
-        },
-        {
-          path:'paymentHistory',
-          element:<PaymentHistory/>
-        },
-        {
-          path:'review',
-          element:<AddReview/>
-        },
-        {
-          path:'allUsers',
-          element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
-        },
-        // admin routes
-        {
-          path:'adminHome',
-          element:<AdminRoute><AdminHome/></AdminRoute>
-        },
-        {
-          path:'addItem',
-          element:<AdminRoute><AddItem/></AdminRoute>
-        },
-        {
-          path:'manageItem',
-          element:<AdminRoute><ManageItem></ManageItem></AdminRoute>
-        },
-        {
-          path:'manageBooking',
-          element:<AdminRoute><ManageBooking/></AdminRoute>
-        }
-       
-      ]
-    }
-  ]);
+      {
+        path: "adminHome",
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "addItem",
+        element: (
+          <AdminRoute>
+            <AddItem />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageItem",
+        element: (
+          <AdminRoute>
+            <ManageItem></ManageItem>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageBooking",
+        element: (
+          <AdminRoute>
+            <ManageBooking />
+          </AdminRoute>
+        ),
+      },
+    ],
+  },
+]);
