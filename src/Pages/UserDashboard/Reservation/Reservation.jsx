@@ -5,12 +5,44 @@ import {
   FaWordpressSimple,
 } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import useAuth from "../../../Hooks/UseAuth";
+import useAxiosSecure from "../../../Hooks/UseAxiosSecure";
+import Swal from "sweetalert2";
 
 const Reservation = () => {
+  const {user} = useAuth();
+  const [axiosSecure] = useAxiosSecure();
+
+  // handle booking 
+  const handleBooking = event =>{
+    event.preventDefault();
+    const form = event.target;
+    const date = form.date.value;
+    const time = form.time.value;
+    const person = form.person.value;
+    const costumeName = form.name.value;
+    const costumerEmail = form.email.value;
+    const phone = form.phone.value;
+    const table = {date,time,guest:person,costumeName,costumerEmail,phone,status:'pending'}
+    // console.log(table)
+    axiosSecure.post('/book-table',{table})
+    .then(data=>{
+      if(data.data.insertedId){
+        form.reset();
+        Swal.fire({
+          position: 'top-center',
+          icon: 'success',
+          title: 'Booking Successful',
+          showConfirmButton: false,
+          timer: 1500
+        }) 
+      }
+    })
+  }
   return (
     <div>
       <SectionTitle heading={"BOOK A TABLE"} subHeading={"---Reservation---"} />
-      <form className="w-10/12 mx-auto text-xl font-semibold bg-[#F3F3F3] px-4 lg:px-20 py-4 lg:py-8 ">
+      <form onSubmit={handleBooking} className="w-10/12 mx-auto text-xl font-semibold bg-[#F3F3F3] px-4 lg:px-20 py-4 lg:py-8 ">
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 ">
           <div className="form-control w-full">
             <label className="label">
@@ -18,6 +50,8 @@ const Reservation = () => {
             </label>
             <input
               type="date"
+              name="date"
+              required
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs"
             />
@@ -28,6 +62,8 @@ const Reservation = () => {
             </label>
             <input
               type="time"
+              name="time"
+              required
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs"
             />
@@ -36,15 +72,16 @@ const Reservation = () => {
             <label className="label">
               <span className="label-text">Person</span>
             </label>
-            <select className="select select-bordered">
+            <select 
+            name="person" required className="select select-bordered">
               <option disabled selected>
                 Select Person
               </option>
-              <option>1 Person</option>
-              <option>2 Person</option>
-              <option>3 Person</option>
-              <option>4 Person</option>
-              <option>5 Person</option>
+              <option>1 </option>
+              <option>2 </option>
+              <option>3 </option>
+              <option>4 </option>
+              <option>5 </option>
             </select>
           </div>
           <div className="form-control w-full">
@@ -52,7 +89,10 @@ const Reservation = () => {
               <span className="label-text">What is your name?</span>
             </label>
             <input
+            value={user?.displayName}
               type="text"
+              required
+              name="name"
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs"
             />
@@ -62,7 +102,9 @@ const Reservation = () => {
               <span className="label-text">Phone*</span>
             </label>
             <input
+            name="phone"
               type="number"
+              required
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs"
             />
@@ -73,6 +115,9 @@ const Reservation = () => {
             </label>
             <input
               type="email"
+              required
+              value={user?.email}
+              name="email"
               placeholder="Type here"
               className="input input-bordered w-full max-w-xs"
             />
