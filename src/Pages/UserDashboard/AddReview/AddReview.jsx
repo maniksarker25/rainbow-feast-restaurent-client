@@ -14,7 +14,7 @@ const AddReview = () => {
         const menu = form.menu.value;
         const rating = parseFloat(form.rating.value);
         const details = form.description.value;
-        const review = {menu,rating,details,name:user?.displayName};
+        const review = {menu,rating,details,name:user?.displayName, email:user?.email};
         axiosSecure.post('/add-review',review)
         .then(data=>{
             if(data.data.insertedId){
@@ -25,6 +25,7 @@ const AddReview = () => {
                     showConfirmButton: false,
                     timer: 1500
                   }) 
+                  form.reset();
             }
         })
         
