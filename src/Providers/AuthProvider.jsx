@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -31,7 +32,7 @@ const AuthProvider = ({ children }) => {
   };
   // signIn with google
   const googleLogin = () => {
-    setLoading(true)
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
@@ -48,6 +49,10 @@ const AuthProvider = ({ children }) => {
     // setLoading(true);
     return signOut(auth);
   };
+  //reset password
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
 
   //find current user
   useEffect(() => {
@@ -57,7 +62,9 @@ const AuthProvider = ({ children }) => {
       console.log(currentUser);
       if (currentUser && currentUser.email) {
         axios
-          .post("https://rainbow-feast-restaurant-server.vercel.app/jwt", { email: currentUser.email })
+          .post("https://rainbow-feast-restaurant-server.vercel.app/jwt", {
+            email: currentUser.email,
+          })
           .then((data) => {
             console.log(data.data.token);
             localStorage.setItem("access-token", data.data.token);
@@ -81,6 +88,7 @@ const AuthProvider = ({ children }) => {
     setLoading,
     updateUserProfile,
     googleLogin,
+    resetPassword,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

@@ -11,13 +11,16 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
-  const { signIn, setLoading } = useContext(AuthContext);
+  const { signIn, setLoading,resetPassword } = useContext(AuthContext);
+  const emailRef = useRef();
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const [showPassword, setShowPassword] = useState(false);
   const from = location.state?.from?.pathname || '/';
   const handleLogin = (event) => {
     event.preventDefault();
@@ -61,6 +64,22 @@ const Login = () => {
       setDisabled(true);
     }
   };
+
+
+  // handle reset password ----
+  const handleResetPassword = () => {
+    const email = emailRef.current.value;
+    console.log(email)
+    if (!email) {
+      setError("Provide email for reset password");
+    }
+    resetPassword(email)
+      .then(() => {})
+      .catch((error) => {
+        const errorMessage = error.message;
+        setError(errorMessage);
+      });
+  };
   return (
     <div>
       <Helmet>
@@ -80,26 +99,33 @@ const Login = () => {
                 <input
                   type="text"
                   name="email"
+                  ref={emailRef}
                   required
                   placeholder="email"
                   className="input input-bordered"
                 />
               </div>
-              <div className="form-control">
+              <div className="form-control relative">
                 <label className="label">
                   <span className="label-text">Password</span>
+                  <span
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-6 top-[55px] cursor-pointer"
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   required
                   placeholder="password"
                   className="input input-bordered"
                 />
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <p onClick={handleResetPassword}><a href="#" className="label-text-alt link link-hover">
                     Forgot password?
-                  </a>
+                  </a></p>
                 </label>
               </div>
               <div className="form-control">

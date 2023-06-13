@@ -137,7 +137,7 @@ Z`;
         </div></Link>
       </div>
       <div className="md:flex gap-16 mt-12 lg:mt-32">
-        <div>
+        {/* <div> */}
           <ResponsiveContainer width="100%" height={300}>
             <BarChart
               data={chartData}
@@ -163,8 +163,8 @@ Z`;
               </Bar>
             </BarChart>
           </ResponsiveContainer>
-        </div>
-        <div>
+        {/* </div> */}
+        {/* <div> */}
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Legend></Legend>
@@ -188,7 +188,7 @@ Z`;
               </Pie>
             </PieChart>
           </ResponsiveContainer>
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

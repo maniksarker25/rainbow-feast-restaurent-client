@@ -6,9 +6,11 @@ import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import { sendEmailVerification } from "firebase/auth";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile,setLoading } = useContext(AuthContext);
+  const { createUser, updateUserProfile, setLoading } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -18,6 +20,7 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSignUp = (data) => {
     setError("");
@@ -28,11 +31,16 @@ const SignUp = () => {
         setSuccess("User created successfully");
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
-            const savedUser = {name:data.name, email:data.email,role:'user',photoURL:data.photoURL}
-            fetch("https://rainbow-feast-restaurant-server.vercel.app",{
-              method:'POST',
-              headers:{'content-type':'application/json'},
-              body:JSON.stringify(savedUser)
+            const savedUser = {
+              name: data.name,
+              email: data.email,
+              role: "user",
+              photoURL: data.photoURL,
+            };
+            fetch("https://rainbow-feast-restaurant-server.vercel.app", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify(savedUser),
             })
               .then((res) => res.json())
               .then((data) => {
@@ -54,8 +62,7 @@ const SignUp = () => {
       .catch((error) => {
         const errorMessage = error.message;
         setError(errorMessage);
-        setLoading(false)
-        
+        setLoading(false);
       });
   };
   //   console.log(watch("example"));
@@ -115,9 +122,15 @@ const SignUp = () => {
                   <span className="text-red-600">Email is required</span>
                 )}
               </div>
-              <div className="form-control">
+              <div className="form-control relative">
                 <label className="label">
                   <span className="label-text">Password</span>
+                  <span
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-6 top-[55px] cursor-pointer"
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
                 </label>
                 <input
                   {...register("password", {
@@ -126,7 +139,7 @@ const SignUp = () => {
                     maxLength: 20,
                     pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                   })}
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="password"
                   className="input input-bordered"
@@ -173,7 +186,7 @@ const SignUp = () => {
                 </Link>
               </p>
             </div>
-            <SocialLogin/>
+            <SocialLogin />
           </div>
         </div>
       </div>
