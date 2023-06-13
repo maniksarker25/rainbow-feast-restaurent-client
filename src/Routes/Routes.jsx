@@ -19,6 +19,7 @@ import UserHome from "../Pages/UserDashboard/UserHome/UserHome";
 import AdminHome from "../Pages/AdminDashboard/AdminHome/AdminHome";
 import ManageBooking from "../Pages/AdminDashboard/ManageBooking/ManageBooking";
 import AddReview from "../Pages/UserDashboard/AddReview/AddReview";
+import PaymentHistory from "../Pages/UserDashboard/PaymentHistory/PaymentHistory";
 
  export const router = createBrowserRouter([
     {
@@ -63,6 +64,10 @@ import AddReview from "../Pages/UserDashboard/AddReview/AddReview";
         {
           path:'payment',
           element:<Payment/>
+        },
+        {
+          path:'paymentHistory',
+          element:<PaymentHistory/>
         },
         {
           path:'review',

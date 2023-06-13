@@ -12,16 +12,16 @@ const AddReview = () => {
         event.preventDefault();
         const form = event.target;
         const menu = form.menu.value;
-        const rating = form.rating.value;
+        const rating = parseFloat(form.rating.value);
         const details = form.description.value;
-        const review = {menu,rating,details,costumerName:user?.displayName};
+        const review = {menu,rating,details,name:user?.displayName};
         axiosSecure.post('/add-review',review)
         .then(data=>{
             if(data.data.insertedId){
                 Swal.fire({
                     position: 'top-center',
                     icon: 'success',
-                    title: 'Item successfully Added',
+                    title: 'Review successfully Added',
                     showConfirmButton: false,
                     timer: 1500
                   }) 
