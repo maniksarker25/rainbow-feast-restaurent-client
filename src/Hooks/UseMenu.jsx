@@ -6,7 +6,7 @@ const useMenu = () => {
   // const [loading,setLoading] = useState(true)
   // useEffect(()=>{
   //   setLoading(true);
-  //   fetch('https://rainbow-feast-restaurant-server.vercel.app/menu')
+  //   fetch('http://localhost:5000/menu')
   //   .then(res=>res.json())
   //   .then(data =>{
   //     setMenu(data);
@@ -19,7 +19,7 @@ const useMenu = () => {
   const { data: menu = [], isLoading: menuLoading, refetch } = useQuery({
     queryKey: ["menu"],
     queryFn: async () => {
-      const res = await fetch('https://rainbow-feast-restaurant-server.vercel.app/menu');
+      const res = await fetch('http://localhost:5000/menu');
       // console.log(res.json());
       return res.json();
     }

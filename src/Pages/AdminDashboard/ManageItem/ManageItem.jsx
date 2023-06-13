@@ -54,11 +54,17 @@ const ManageItem = () => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
-    const price = form.price.value;
+    const price = parseFloat(form.price.value);
     const recipeDetails = form.recipeDetails.value;
     const updatedRecipe = {name,price,recipe:recipeDetails}
     // console.log(updatedRecipe)
-
+    axiosSecure.patch(`/update-recipe/${item._id}`, {updatedRecipe})
+    .then(data=>{
+      if(data.data.modifiedCount > 0){
+        refetch();
+        Swal.fire("Updated!", "Your Item Has Been Updated.", "success");
+      }
+    })
   }
   return (
     <div>
@@ -157,7 +163,7 @@ const ManageItem = () => {
                     <input
                       className="gradient-btn cursor-pointer px-4 py-2"
                       type="submit"
-                      value="Send Feedback"
+                      value="Update"
                     />
                     <button
                       onClick={closeModal}
