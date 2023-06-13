@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import LoadingSpiner from "../../../components/LoadingSpiner/LoadingSpiner";
 import Swal from "sweetalert2";
+import moment from "moment";
 
 
 const ManageBooking = () => {
@@ -54,7 +55,7 @@ const ManageBooking = () => {
                 <th>Email</th>
                 <th>Guest</th>
                 <th>Total Price</th>
-                <th>Payment Date</th>
+                <th>Booking Date</th>
                 <th>Status</th>
                 <th>action</th>
               </tr>
@@ -67,7 +68,7 @@ const ManageBooking = () => {
                   <td>{booking.email}</td>
                   <td>{booking.guest}</td>
                   <td>{booking.price}</td>
-                  <td>{booking.date}</td>
+                  <td>{moment(booking.date).format('MMMM Do YYYY')}</td>
                   <td>{booking.status}</td>
                   <td className="flex gap-2">
                     <button disabled={booking.status === "denied" || booking.status === 'approved'} onClick={()=>handleStatus(booking._id,'denied')} className="bg-red-500 px-4 py-2 rounded-md text-white ">Deny</button>

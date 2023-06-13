@@ -144,12 +144,12 @@ const UserDashboard = () => {
               Shop
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to="/contact">
               <FaShopify />
               Contact
             </NavLink>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

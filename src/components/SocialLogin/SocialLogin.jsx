@@ -13,13 +13,14 @@ const SocialLogin = () => {
     googleLogin().then((result) => {
       const loggedInUser = result.user;
       //   console.log(loggedInUser)
+      navigate(from, { replace: true });
       const savedUser = {
         name: loggedInUser.displayName,
         email: loggedInUser.email,
         role:'user',
         photoURL:loggedInUser.photoURL
       };
-      fetch("https://rainbow-feast-restaurant-server.vercel.app", {
+      fetch("https://rainbow-feast-restaurant-server.vercel.app/users", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(savedUser),

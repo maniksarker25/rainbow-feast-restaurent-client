@@ -35,9 +35,9 @@ const SignUp = () => {
               name: data.name,
               email: data.email,
               role: "user",
-              photoURL: data.photoURL,
+              photoURL:data.photoURL
             };
-            fetch("https://rainbow-feast-restaurant-server.vercel.app", {
+            fetch("https://rainbow-feast-restaurant-server.vercel.app/users", {
               method: "POST",
               headers: { "content-type": "application/json" },
               body: JSON.stringify(savedUser),

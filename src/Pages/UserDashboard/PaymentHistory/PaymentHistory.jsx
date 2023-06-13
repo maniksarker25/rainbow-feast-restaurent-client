@@ -3,6 +3,7 @@ import useAuth from "../../../Hooks/UseAuth";
 import useAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import LoadingSpiner from "../../../components/LoadingSpiner/LoadingSpiner";
+import moment from "moment/moment";
 
 
 const PaymentHistory = () => {
@@ -51,7 +52,7 @@ const PaymentHistory = () => {
                   <td>{payment.itemNames.map(item=><p key={item}>{item}</p>)}</td>
                   <td>{payment.email}</td>
                   <td>{payment.price}</td>
-                  <td>{payment.date}</td>
+                  <td>{moment(payment.date).format('MMMM Do YYYY')}</td>
                   
                 </tr>
               ))}
