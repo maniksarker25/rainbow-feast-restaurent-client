@@ -75,9 +75,6 @@ const Reservation = () => {
             </label>
             <select 
             name="person" required className="select select-bordered">
-              <option disabled selected>
-                Select Person
-              </option>
               <option>1 </option>
               <option>2 </option>
               <option>3 </option>

@@ -11,7 +11,7 @@ const MyBookings = () => {
     queryKey: ["my-bookings", user?.email],
     enabled: !loading && !!user?.email,
     queryFn: async () => {
-      const res = await axiosSecure(`/bookings?email=${user?.email}`);
+      const res = await axiosSecure(`/my-bookings?email=${user?.email}`);
       return res.data;
     },
   });
