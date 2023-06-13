@@ -6,7 +6,7 @@ import useAuth from "./UseAuth";
 
 // create base url 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://rainbow-feast-restaurant-server.vercel.app",
 });
 const useAxiosSecure = () => {
   const { logOut, setLoading } = useAuth();

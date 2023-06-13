@@ -21,6 +21,7 @@ import PaymentHistory from "../Pages/UserDashboard/PaymentHistory/PaymentHistory
 import Reservation from "../Pages/UserDashboard/Reservation/Reservation";
 import AllOrders from "../Pages/AdminDashboard/AllOrders/AllOrders";
 import MyBookings from "../Pages/UserDashboard/MyBookings/MyBookings";
+import AllCostumer from "../Pages/AdminDashboard/AdminHome/AllCostumers/AllCostumer";
 
 export const router = createBrowserRouter([
   {
@@ -97,6 +98,10 @@ export const router = createBrowserRouter([
       {
         path:'allOrders',
         element:<AdminRoute><AllOrders/></AdminRoute>
+      },
+      {
+        path:'allCostumers',
+        element:<AllCostumer/>
       },
 
       {

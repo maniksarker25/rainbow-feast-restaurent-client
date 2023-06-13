@@ -102,7 +102,7 @@ Z`;
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-4 costumers p-8">
+       <Link to='/dashboard/allCostumers'> <div className="flex items-center gap-4 costumers p-8">
           <FaUser />
           <div>
             <p className="text-3xl md:text-4xl text-white font-bold ">
@@ -112,7 +112,7 @@ Z`;
               Costumers
             </p>
           </div>
-        </div>
+        </div></Link>
         <Link to='/dashboard/manageItem'><div className="flex items-center gap-4 products p-8">
           <FaProductHunt className="text-white lg:text-7xl" />
           <div>

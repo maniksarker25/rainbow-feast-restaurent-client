@@ -4,7 +4,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
-  const { googleLogin } = useContext(AuthContext);
+  const { googleLogin,setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -16,9 +16,10 @@ const SocialLogin = () => {
       const savedUser = {
         name: loggedInUser.displayName,
         email: loggedInUser.email,
-        role:'user'
+        role:'user',
+        photoURL:loggedInUser.photoURL
       };
-      fetch("http://localhost:5000/users", {
+      fetch("https://rainbow-feast-restaurant-server.vercel.app", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(savedUser),
@@ -27,7 +28,12 @@ const SocialLogin = () => {
         .then(() => {
           navigate(from, { replace: true });
         });
-    });
+    })
+    .catch(error=>{
+      const errorMessage = error.message;
+      console.log(errorMessage)
+      setLoading(false)
+    })
   };
   return (
     <div className="text-center -mt-3">

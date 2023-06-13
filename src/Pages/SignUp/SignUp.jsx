@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile,setLoading } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -28,8 +28,8 @@ const SignUp = () => {
         setSuccess("User created successfully");
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
-            const savedUser = {name:data.name, email:data.email,role:'user'}
-            fetch("http://localhost:5000/users",{
+            const savedUser = {name:data.name, email:data.email,role:'user',photoURL:data.photoURL}
+            fetch("https://rainbow-feast-restaurant-server.vercel.app",{
               method:'POST',
               headers:{'content-type':'application/json'},
               body:JSON.stringify(savedUser)
@@ -54,6 +54,8 @@ const SignUp = () => {
       .catch((error) => {
         const errorMessage = error.message;
         setError(errorMessage);
+        setLoading(false)
+        
       });
   };
   //   console.log(watch("example"));
