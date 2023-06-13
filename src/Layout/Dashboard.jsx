@@ -118,7 +118,7 @@ const UserDashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="dashboard/myBooking">
+                <NavLink to="/dashboard/myBookings">
                   <FaBook />
                   My Booking
                 </NavLink>

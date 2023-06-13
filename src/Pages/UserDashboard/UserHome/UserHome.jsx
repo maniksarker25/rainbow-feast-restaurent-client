@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/UseAuth";
 import useAxiosSecure from "../../../Hooks/UseAxiosSecure";
-import { FaShoppingCart, FaStar } from "react-icons/fa";
+import { FaCalendarAlt, FaShoppingCart, FaStar } from "react-icons/fa";
 
 const UserHome = () => {
   const { user, loading } = useAuth();
@@ -40,10 +40,13 @@ const UserHome = () => {
               <p className="text-[#0088FE] flex gap-2 items-center">
                 <FaShoppingCart></FaShoppingCart> Orders: {stats.orders}
               </p>
+              <p className="text-[#00C4A1] flex gap-2 items-center">
+                <FaStar /> Reviews: {stats.reviews}
+              </p>
               <p
-                className="text-[#00C4A1] flex gap-2 items-center"
+                className="text-[#FFBB28] flex gap-2 items-center"
               >
-                <FaStar/> Reviews: {stats.reviews}
+                  <FaCalendarAlt /> Bookings: {stats.bookings}
               </p>
             </div>
           </div>

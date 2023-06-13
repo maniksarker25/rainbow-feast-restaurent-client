@@ -21,9 +21,10 @@ const Reservation = () => {
     const time = form.time.value;
     const person = form.person.value;
     const costumeName = form.name.value;
-    const costumerEmail = form.email.value;
+    const email = form.email.value;
     const phone = form.phone.value;
-    const table = {date,time,guest:person,costumeName,costumerEmail,phone,status:'pending'}
+    const price = parseFloat(person * 25);
+    const table = {date,time,guest:person,costumeName,email,phone,status:'pending', price}
     // console.log(table)
     axiosSecure.post('/book-table',{table})
     .then(data=>{
