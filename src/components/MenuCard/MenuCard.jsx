@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useCart from "../../Hooks/UseCart";
+import UseAdmin from "../../Hooks/UseAdmin";
 
 const MenuCard = ({ item }) => {
   const { image, name, recipe, price,_id } = item;
@@ -11,6 +12,7 @@ const MenuCard = ({ item }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [,refetch] = useCart();
+  const [isAdmin] = UseAdmin();
   // handle add to cart
   const handleAddToCart = (item) => {
     // console.log(item);
@@ -46,7 +48,7 @@ const MenuCard = ({ item }) => {
   return (
     <div className="bg-[#F3F3F3] text-center">
       <div className=" relative ">
-        <img className="w-full" src={image} alt="" />
+        <img className="w-full h-64" src={image} alt="" />
         <p className="bg-[#111827] py-3 text-white text-center font-semibold px-6 absolute top-3 right-3">
           ${price}
         </p>
@@ -55,6 +57,7 @@ const MenuCard = ({ item }) => {
         <h6 className="text-2xl my-3 font-semibold">{name}</h6>
         <p>{recipe}</p>
         <button
+          disabled={isAdmin}
           onClick={() => handleAddToCart(item)}
           className="uppercase font-semibold mt-6 text-[#BB8506] bg-[#E8E8E8] px-6 py-3 rounded-lg border-b-2 border-[#BB8506] hover:bg-[#1F2937]"
         >

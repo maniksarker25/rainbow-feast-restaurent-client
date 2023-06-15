@@ -30,7 +30,7 @@ const PaymentHistory = () => {
             <SectionTitle subHeading={"---At a Glance!---"} heading={"PAYMENT HISTORY"}/>
             <div className="bg-white px-4 py-8 w-10/12 mx-auto ">
         <h3 className="text-2xl font-bold p-4 uppercase">
-          All Users:{paymenHistory.length}
+          All Payments:{paymenHistory.length}
         </h3>
         <div className="overflow-x-auto">
           <table className="table table-zebra w-full">

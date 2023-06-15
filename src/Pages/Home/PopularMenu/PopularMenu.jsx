@@ -3,6 +3,7 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import MenuItem from "../../Shared/MenuItem/MenuItem";
 import useMenu from "../../../Hooks/UseMenu";
 import LoadingSpiner from "../../../components/LoadingSpiner/LoadingSpiner";
+import { Link } from "react-router-dom";
 
 
 const PopularMenu = () => {
@@ -31,7 +32,7 @@ const PopularMenu = () => {
                 }
             </div>
             <div className=" flex flex-col items-center justify-center mt-8 ">
-            <button className="border-b-4 py-2  rounded-br-lg rounded-bl-lg px-3 font-semibold border-black flex items-center">View Full Menu</button>
+            <Link to='/menu'><button  className="border-b-4 py-2  rounded-br-lg rounded-bl-lg px-3 font-semibold border-black flex items-center">View Full Menu</button></Link>
             </div>
         </section>
     );

@@ -12,12 +12,11 @@ const Footer = () => {
               <h4 className="text-2xl my-4 flex gap-2 items-center"><FaGraduationCap className="text-3xl"/>RainbowFeast</h4>
               <p>
                 {" "}
-                We are dedicated to helping individuals enhance <br /> their
-                language skills and broaden their cultural horizons..
+                Indulge in a kaleidoscope of flavors at RainbowFeast, where <br /> culinary artistry meets vibrant dining experiences
               </p>
             </div>
             <div className="flex gap-3 text-2xl my-4">
-              <FaFacebook></FaFacebook>
+              <FaFacebook  className="cursor-pointer"></FaFacebook>
               <FaInstagram />
               <FaTwitter />
             </div>
@@ -34,7 +33,7 @@ const Footer = () => {
                 <Link to='/menu'>Menu</Link>
               </p>
               <p className="mb-4">
-                <Link to='/orderFood/:category'>Order</Link>
+                <Link to='/orderFood/salad'>Order</Link>
               </p>
             </div>
           </div>

@@ -23,7 +23,6 @@ const Profile = ({ user,handleLogOut }) => {
           {({ active }) => (
             <a
               className={`${active && "bg-blue-500"}`}
-              href="/account-settings"
             >
               {user?.displayName}
             </a>
@@ -33,7 +32,6 @@ const Profile = ({ user,handleLogOut }) => {
           {({ active }) => (
             <a
               className={`${active && "bg-blue-500"}`}
-              href="/account-settings"
             >
               {user?.email}
             </a>

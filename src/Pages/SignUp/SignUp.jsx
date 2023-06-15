@@ -8,9 +8,12 @@ import Swal from "sweetalert2";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import { sendEmailVerification } from "firebase/auth";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+const image_hosting_token = import.meta.env.VITE_Image_Upload_Token;
 
 const SignUp = () => {
   const { createUser, updateUserProfile, setLoading } = useContext(AuthContext);
+  const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
+
   const {
     register,
     handleSubmit,
@@ -25,45 +28,59 @@ const SignUp = () => {
   const handleSignUp = (data) => {
     setError("");
     setSuccess("");
-    createUser(data.email, data.password)
-      .then((result) => {
-        const createdUser = result.user;
-        setSuccess("User created successfully");
-        updateUserProfile(data.name, data.photoURL)
-          .then(() => {
-            const savedUser = {
-              name: data.name,
-              email: data.email,
-              role: "user",
-              photoURL:data.photoURL
-            };
-            fetch("https://rainbow-feast-restaurant-server.vercel.app/users", {
-              method: "POST",
-              headers: { "content-type": "application/json" },
-              body: JSON.stringify(savedUser),
+    const formData = new FormData();
+    formData.append('image', data.image[0]);
+    fetch(image_hosting_url,{
+      method:"POST",
+      body:formData
+    })
+    .then(res=>res.json())
+    .then(imgResponse=>{
+      if(imgResponse.success){
+        const imgURL = imgResponse.data.display_url;
+        createUser(data.email, data.password)
+        .then((result) => {
+          const createdUser = result.user;
+          setSuccess("User created successfully");
+          updateUserProfile(data.name, imgURL)
+            .then(() => {
+              const savedUser = {
+                name: data.name,
+                email: data.email,
+                role: "user",
+                photoURL: imgURL,
+              };
+              fetch("https://rainbow-feast-restaurant-server.vercel.app/users", {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify(savedUser),
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  if (data.insertedId) {
+                    reset();
+                    Swal.fire({
+                      position: "top-center",
+                      icon: "success",
+                      title: "User Created Successfully!",
+                      showConfirmButton: false,
+                      timer: 1500,
+                    });
+                    navigate("/");
+                  }
+                });
             })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.insertedId) {
-                  reset();
-                  Swal.fire({
-                    position: "top-center",
-                    icon: "success",
-                    title: "User Created Successfully!",
-                    showConfirmButton: false,
-                    timer: 1500,
-                  });
-                  navigate("/");
-                }
-              });
-          })
-          .catch((error) => console.log(error));
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
-        setLoading(false);
-      });
+            .catch((error) => console.log(error));
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          setError(errorMessage);
+          setLoading(false);
+        });
+      }
+    })
+
+ 
   };
   //   console.log(watch("example"));
   return (
@@ -95,13 +112,12 @@ const SignUp = () => {
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Photo URL</span>
+                  <span className="label-text">Photo</span>
                 </label>
                 <input
-                  {...register("photoURL", { required: true })}
-                  type="url"
-                  placeholder="Photo URL"
-                  className="input input-bordered"
+                  type="file"
+                  {...register("image", { required: true })}
+                  className="file-input file-input-warning file-input-bordered w-full max-w-xs"
                 />
                 {errors.photoURL && (
                   <span className="text-red-600">photoURL is required</span>

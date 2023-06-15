@@ -8,7 +8,7 @@ import Profile from "../../../components/Profile/Profile";
 import LoadingSpiner from "../../../components/LoadingSpiner/LoadingSpiner";
 
 const Navbar = () => {
-  const { user, logOut,loading } = useContext(AuthContext);
+  const { user, logOut, loading } = useContext(AuthContext);
   const [isAdmin] = UseAdmin();
   // console.log(user?.email);
   const [cart] = useCart();
@@ -22,8 +22,8 @@ const Navbar = () => {
       });
   };
 
-  if(loading){
-    return <LoadingSpiner/>
+  if (loading) {
+    return <LoadingSpiner />;
   }
   const navItems = (
     <>
@@ -38,7 +38,7 @@ const Navbar = () => {
       <li>
         <NavLink
           className={({ isActive }) => (isActive ? "active" : "default")}
-          to={isAdmin ? '/dashboard/adminHome':'/dashboard/userHome'}
+          to={isAdmin ? "/dashboard/adminHome" : "/dashboard/userHome"}
         >
           DashBoard
         </NavLink>
@@ -59,22 +59,24 @@ const Navbar = () => {
           Order Food
         </NavLink>
       </li>
-      <li className="lg:mr-6">
-        <NavLink
-          className={({ isActive }) => (isActive ? "active" : "default")}
-          to="/dashboard/myCart"
-        >
-          <div className=" flex relative">
-            <div>
-              {" "}
-              <FaShoppingCart />
+      {!isAdmin && (
+        <li className="lg:mr-6">
+          <NavLink
+            className={({ isActive }) => (isActive ? "active" : "default")}
+            to="/dashboard/myCart"
+          >
+            <div className=" flex relative">
+              <div>
+                {" "}
+                <FaShoppingCart />
+              </div>
+              <div className="badge badge-secondary absolute -top-4 -right-6">
+                +{cart?.length || 0}
+              </div>
             </div>
-            <div className="badge badge-secondary absolute -top-4 -right-6">
-              +{cart?.length || 0}
-            </div>
-          </div>
-        </NavLink>
-      </li>
+          </NavLink>
+        </li>
+      )}
       {/* {loading ? (
             "Loading"
           ) : user ? (
@@ -134,8 +136,8 @@ const Navbar = () => {
         {/* <div className="navbar-end">
           <a className="btn">Get started</a>
         </div> */}
-      <div >
-      {loading ? (
+        <div>
+          {loading ? (
             "Loading"
           ) : user ? (
             <Profile handleLogOut={handleLogOut} user={user} />
@@ -143,13 +145,11 @@ const Navbar = () => {
             <Link>
               <Link to="/login">
                 {" "}
-                <button className="text-xl font-bold">
-                  LOGIN
-                </button>
+                <button className="text-xl font-bold">LOGIN</button>
               </Link>
             </Link>
           )}
-      </div>
+        </div>
       </div>
     </div>
   );

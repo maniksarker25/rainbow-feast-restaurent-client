@@ -14,7 +14,7 @@ const AllUsers = () => {
 
   // handle make admin 
   const handleMakeAdmin = user =>{
-    fetch(`https://rainbow-feast-restaurant-server.vercel.app/admin/${user._id}`,{
+    fetch(`https://rainbow-feast-restaurant-server.vercel.app/users/admin/${user._id}`,{
       method:'PATCH'
     })
     .then(res=>res.json())
